@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sparky_for_reddit/providers/auth.dart';
 import 'package:sparky_for_reddit/screens/home_screen.dart';
@@ -44,23 +45,20 @@ class MyApp extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: 15,
             ),
-            headline1: const TextStyle(
-              color: Colors.white,
-              fontSize: 30,
-              fontFamily: "Exo",
-              fontWeight: FontWeight.w700,
+            headline1: GoogleFonts.supermercadoOne(
+              fontSize: 50,
             ),
-            headline2: const TextStyle(
-              color: Colors.grey,
+            headline2: GoogleFonts.supermercadoOne(
               fontSize: 15,
+              color: Colors.grey,
             ),
             headline3: const TextStyle(
               color: Colors.white,
               fontSize: 15,
             ),
             headline4: const TextStyle(
-              color: Colors.white,
-              fontSize: 20,
+              color: Colors.grey,
+              fontSize: 15,
               fontWeight: FontWeight.bold,
             ),
             bodyText1: const TextStyle(

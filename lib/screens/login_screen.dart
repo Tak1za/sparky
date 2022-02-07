@@ -13,25 +13,31 @@ class LoginScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
-            'assets/images/reddit.png',
-            fit: BoxFit.cover,
-            width: 150,
-            height: 150,
+          Text(
+            'Sparky',
+            style: Theme.of(context).textTheme.headline1,
+          ),
+          Text(
+            'for',
+            style: Theme.of(context).textTheme.headline2,
+          ),
+          Text(
+            'Reddit',
+            style: Theme.of(context).textTheme.headline1,
           ),
           const SizedBox(
-            height: 10,
+            height: 20,
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width / 1.5,
             child: Text(
               "Sign in to access your Reddit account, vote on posts, save posts, comment and much more!",
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline2,
+              style: Theme.of(context).textTheme.headline4,
             ),
           ),
           const SizedBox(
-            height: 10,
+            height: 20,
           ),
           SizedBox(
             width: MediaQuery.of(context).size.width,
