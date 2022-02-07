@@ -11,6 +11,26 @@ class RedditRedirect extends StatefulWidget {
 }
 
 class _RedditRedirectState extends State<RedditRedirect> {
+  void _showDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Login Error"),
+          content: const Text("Failed to Login"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("Okay"),
+            )
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);
@@ -23,7 +43,13 @@ class _RedditRedirectState extends State<RedditRedirect> {
             .then((_) => auth.setRedditAccessTokenFromCode(code))
             .then(
               (_) => Navigator.of(context).pushReplacementNamed('/home'),
-            ),
+            )
+            .catchError(
+          (_) {
+            Navigator.of(context).pushReplacementNamed('/');
+            _showDialog();
+          },
+        ),
         builder: (ctx, snapshot) {
           return const Center(
             child: CircularProgressIndicator(),

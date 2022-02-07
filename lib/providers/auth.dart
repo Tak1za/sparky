@@ -95,6 +95,7 @@ class Auth with ChangeNotifier {
         } catch (e) {
           log('redditGetAccessTokenFromCode :: Not able to parse Token',
               error: e);
+          rethrow;
         }
       } else if (response.statusCode == 401) {
         log('Reddit API Token Revoked ${response.statusCode}');
@@ -103,6 +104,7 @@ class Auth with ChangeNotifier {
       }
     } catch (e) {
       log('redditGetAccessTokenFromCode :: Not able to get Token', error: e);
+      rethrow;
     }
   }
 }
