@@ -49,11 +49,16 @@ class Auth with ChangeNotifier {
     await prefs.setString('reddit_access_code', code);
   }
 
-  Future<void> tryAutoLogin() async {
+  Future<bool> tryAutoLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (!prefs.containsKey('reddit_access_code') ||
+        !prefs.containsKey('reddit_refresh_token')) {
+      return false;
+    }
     accessToken = prefs.getString('reddit_access_code');
     refreshToken = prefs.getString('reddit_refresh_token');
     notifyListeners();
+    return true;
   }
 
   Future<void> logout() async {

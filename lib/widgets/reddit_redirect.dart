@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sparky_for_reddit/providers/auth.dart';
+import 'package:sparky_for_reddit/widgets/navigation.dart';
 
 class RedditRedirect extends StatefulWidget {
   final String query;
@@ -41,19 +42,21 @@ class _RedditRedirectState extends State<RedditRedirect> {
         future: auth
             .setRedditAuthorisationCode(code)
             .then((_) => auth.setRedditAccessTokenFromCode(code))
-            .then(
-              (_) => Navigator.of(context).pushReplacementNamed('/home'),
-            )
-            .catchError(
-          (_) {
-            Navigator.of(context).pushReplacementNamed('/');
-            _showDialog();
-          },
-        ),
+            .then((value) => Navigator.of(context, rootNavigator: true)
+                    .pushAndRemoveUntil(MaterialPageRoute(builder: (context) {
+                  return const Navigation();
+                }), (_) => false))
+            .catchError((err) {
+          Navigator.of(context).pop();
+          _showDialog();
+        }),
         builder: (ctx, snapshot) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return Container();
         },
       ),
     );
